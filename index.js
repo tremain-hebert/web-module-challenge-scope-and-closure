@@ -28,9 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ *  Counter1 is a variable that runs counterMaker counter2 is a function.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
- * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ *  Counter2 uses a closure because it references "count" which is outside of the context of the function.
+ * 
+ * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better?
+ * 
+ * Counter1 would be prefereable in scenarios where the count would be reset every time the function runs. Counter2 would be better when count does not need to be reset. 
  *
 */
 
@@ -56,11 +62,20 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(min, max){
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  function homeScore(){
+  let homeScore = Math.floor(Math.random() * (max - min + 1)) + min;
+  return homeScore
+  }
+  function awayScore(){
+    let awayScore = Math.floor(Math.random() * (max - min + 1)) + min;
+    return awayScore
+  }
+  return `Home: ${homeScore()} ` + `Away: ${awayScore()}`
 }
+console.log(inning(0,2))
 
 /* Task 3: finalScore()
 
@@ -76,12 +91,11 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
+function finalScore(cb, innings){
 
 }
 
+console.log(finalScore(inning(0,2)))
 /* Task 4: 
 
 Create a function called `scoreboard` that accepts the following parameters: 
